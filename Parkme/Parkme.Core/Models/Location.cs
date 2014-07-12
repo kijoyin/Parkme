@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Parkme.Core.Models
 {
-    class Location
+    public class Location
     {
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
     }
 }

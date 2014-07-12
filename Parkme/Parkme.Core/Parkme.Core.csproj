@@ -41,7 +41,9 @@
   <ItemGroup>
     <Compile Include="Manager\IParkingManager.cs" />
     <Compile Include="Manager\ParkingManager.cs" />
+    <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Parking.cs" />
+    <Compile Include="Models\ParkingSearchItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

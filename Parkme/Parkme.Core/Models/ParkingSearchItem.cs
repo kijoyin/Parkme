@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Parkme.Core.Models
 {
-    class ParkingSearchItem
+    public class ParkingSearchItem
     {
     }
 }
