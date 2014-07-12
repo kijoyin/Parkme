@@ -57,5 +57,21 @@ namespace Parkme.Core.Manager
             }
             return parkings;
         }
+
+
+        public List<ParkingSearchItem> GetNearybyParking(string location)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Location ConvertAddress(string location)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ParkingSearchItem> GetNearybyParking(Location location)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
