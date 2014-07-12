@@ -33,7 +33,16 @@ namespace Parkme.Core.Manager
                 parkingTmpo.VehicleBay = values[12];
                 parkingTmpo.MotorCycleBay = values[13];
                 parkingTmpo.MotorCycleRate = values[14];
-                parkingTmpo.Lat = Convert.ToDecimal(values[15]);
+                decimal lat = new decimal();
+                decimal lon = new decimal();
+                if (Decimal.TryParse(values[15], out lat))
+                {
+                    parkingTmpo.Lat = lat;
+                }
+                if (Decimal.TryParse(values[16], out lon))
+                {
+                    parkingTmpo.Long = lon;
+                }
                 parkingTmpo.Long = Convert.ToDecimal(values[16]);
                 parkings.Add(parkingTmpo);
             }
