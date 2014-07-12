@@ -8,5 +8,7 @@ namespace Parkme.Core.Models
 {
     public class ParkingSearchItem
     {
+        public double distance { get; set; }
+        public string Name { get; set; }
     }
 }

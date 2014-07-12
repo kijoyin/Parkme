@@ -8,7 +8,7 @@ namespace Parkme.Core.Models
 {
     public class Location
     {
-        public decimal Lat { get; set; }
-        public decimal Long { get; set; }
+        public double Lat { get; set; }
+        public double Long { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace Parkme.Core.Models
         public string VehicleBay { get; set; }
         public string MotorCycleBay { get; set; }
         public string MotorCycleRate { get; set; }
-        public decimal Lat { get; set; }
-        public decimal Long { get; set; }
+        public Location Location { get; set; }
+
     }
 }
