@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parkme", "Parkme\Parkme.csproj", "{A433640E-DDAF-45CC-BC72-505FA72E2FDB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{D9A6B458-77D5-4203-8059-DACD8F8B234F}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebAppPublishModule.psm1 = PublishScripts\AzureWebAppPublishModule.psm1
+		PublishScripts\Publish-WebApplication.ps1 = PublishScripts\Publish-WebApplication.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{AF485DE8-57C3-4B3B-9910-7756B58022AF}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\Parkme-WAWS-dev.json = PublishScripts\Configurations\Parkme-WAWS-dev.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A433640E-DDAF-45CC-BC72-505FA72E2FDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A433640E-DDAF-45CC-BC72-505FA72E2FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A433640E-DDAF-45CC-BC72-505FA72E2FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A433640E-DDAF-45CC-BC72-505FA72E2FDB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AF485DE8-57C3-4B3B-9910-7756B58022AF} = {D9A6B458-77D5-4203-8059-DACD8F8B234F}
+	EndGlobalSection
+EndGlobal
