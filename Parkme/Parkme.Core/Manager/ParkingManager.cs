@@ -19,6 +19,11 @@ namespace Parkme.Core.Manager
                 var line = reader.ReadLine();
                 var values = line.Split(',');
                 Parking parkingTmpo = new Parking();
+                decimal rateWeekday = new decimal();
+                decimal rateWeekend = new decimal();
+                decimal lat = new decimal();
+                decimal lon = new decimal();
+
                 parkingTmpo.MeterNo = values[0];
                 parkingTmpo.Category = values[1];
                 parkingTmpo.Street = values[2];
@@ -27,14 +32,18 @@ namespace Parkme.Core.Manager
                 parkingTmpo.Restrictions = values[5];
                 parkingTmpo.OperationalDay = values[6];
                 parkingTmpo.OperationsTime = values[7];
-                parkingTmpo.RateWeekDay = values[9];
-                parkingTmpo.RateWeekEnd = values[10];
+                if (Decimal.TryParse(values[9], out rateWeekday))
+                {
+                    parkingTmpo.RateWeekDay = rateWeekday;
+                }
+                if (Decimal.TryParse(values[10], out rateWeekend))
+                {
+                    parkingTmpo.RateWeekEnd = rateWeekend;
+                }
                 parkingTmpo.LocationDescription = values[11];
                 parkingTmpo.VehicleBay = values[12];
                 parkingTmpo.MotorCycleBay = values[13];
                 parkingTmpo.MotorCycleRate = values[14];
-                decimal lat = new decimal();
-                decimal lon = new decimal();
                 if (Decimal.TryParse(values[15], out lat))
                 {
                     parkingTmpo.Lat = lat;
