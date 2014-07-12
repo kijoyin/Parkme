@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Parkme.Core.Manager;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,6 +37,21 @@ namespace Parkme.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(string location)
+        {
+            ParkingManager manager = new ParkingManager();
+            if (ModelState.IsValid)
+            {
+                var filePath = HttpContext.Server.MapPath("~/data/dataset_parking_meter.csv");
+                manager.GetNearybyParking(location, filePath);
+                // do your stuff like: save to database and redirect to required page.
+            }
+
+            // If we got this far, something failed, redisplay form
             return View();
         }
     }

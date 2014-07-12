@@ -16,9 +16,17 @@ namespace Parkme.Core.Manager
         {
             var reader = new StreamReader(File.OpenRead(pathToCSV));
             var parkings = new List<Parking>();
+            int count = 0;
             while (!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
+                if (count == 0)
+                {
+                    count++;
+                    continue;
+
+                }
+
                 var values = line.Split(',');
                 Parking parkingTmpo = new Parking();
                 decimal rateWeekday = new decimal();
@@ -46,24 +54,33 @@ namespace Parkme.Core.Manager
                 parkingTmpo.VehicleBay = values[12];
                 parkingTmpo.MotorCycleBay = values[13];
                 parkingTmpo.MotorCycleRate = values[14];
+                parkingTmpo.Location = new Location();
                 if (Decimal.TryParse(values[15], out lat))
                 {
-                    parkingTmpo.Lat = lat;
+                    parkingTmpo.Location.Latitude = lat;
                 }
                 if (Decimal.TryParse(values[16], out lon))
                 {
-                    parkingTmpo.Long = lon;
+                    parkingTmpo.Location.Longitude = lon;
                 }
-                parkingTmpo.Long = Convert.ToDecimal(values[16]);
                 parkings.Add(parkingTmpo);
             }
             return parkings;
         }
 
 
-        public List<ParkingSearchItem> GetNearybyParking(string location)
+        public List<ParkingSearchItem> GetNearybyParking(string location, string filePath)
         {
-            throw new NotImplementedException();
+            var list = GetParking(filePath);
+            var result = new List<ParkingSearchItem>();
+            var loc=
+            foreach (Parking item in list)
+            {
+                var r = new ParkingSearchItem();
+                double distance=distance();
+                result.Add(r);
+            }
+            return null;
         }
 
         public Location ConvertAddress(string location)
@@ -84,6 +101,40 @@ namespace Parkme.Core.Manager
         public List<ParkingSearchItem> GetNearybyParking(Location location)
         {
             throw new NotImplementedException();
+        }
+
+        private double distance(double lat1, double lon1, double lat2, double lon2, char unit)
+        {
+            double theta = lon1 - lon2;
+            double dist = Math.Sin(deg2rad(lat1)) * Math.Sin(deg2rad(lat2)) + Math.Cos(deg2rad(lat1)) * Math.Cos(deg2rad(lat2)) * Math.Cos(deg2rad(theta));
+            dist = Math.Acos(dist);
+            dist = rad2deg(dist);
+            dist = dist * 60 * 1.1515;
+            if (unit == 'K')
+            {
+                dist = dist * 1.609344;
+            }
+            else if (unit == 'N')
+            {
+                dist = dist * 0.8684;
+            }
+            return (dist);
+        }
+
+        //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        //::  This function converts decimal degrees to radians             :::
+        //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        private double deg2rad(double deg)
+        {
+            return (deg * Math.PI / 180.0);
+        }
+
+        //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        //::  This function converts radians to decimal degrees             :::
+        //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        private double rad2deg(double rad)
+        {
+            return (rad / Math.PI * 180.0);
         }
     }
 }
