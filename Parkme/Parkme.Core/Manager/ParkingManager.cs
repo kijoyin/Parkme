@@ -1,8 +1,10 @@
-﻿using Parkme.Core.Models;
+﻿using Newtonsoft.Json;
+using Parkme.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -66,7 +68,17 @@ namespace Parkme.Core.Manager
 
         public Location ConvertAddress(string location)
         {
+            HttpWebRequest request = WebRequest.Create("https://maps.googleapis.com/maps/api/geocode/json?address=" + location) as HttpWebRequest;
+            using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+            {
+                // Get the response stream  
+                StreamReader reader = new StreamReader(response.GetResponseStream());
+                var results = JsonConvert.DeserializeObject<dynamic>(reader.ReadToEnd());
+                var Lat = results.results[0].geometry.location.lat;
+                var Long = results.results[0].geometry.location.lng;
+            }
             throw new NotImplementedException();
+                   
         }
 
         public List<ParkingSearchItem> GetNearybyParking(Location location)
