@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Web
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parkme", "Parkme\Parkme.csproj", "{A433640E-DDAF-45CC-BC72-505FA72E2FDB}"
 EndProject
@@ -16,8 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configura
 		PublishScripts\Configurations\Parkme-WAWS-dev.json = PublishScripts\Configurations\Parkme-WAWS-dev.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parkme.Core", "Parkme.Core\Parkme.Core.csproj", "{5CF71181-20CA-4A21-8A5C-21610DFF2D3D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,10 +26,6 @@ Global
 		{A433640E-DDAF-45CC-BC72-505FA72E2FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A433640E-DDAF-45CC-BC72-505FA72E2FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A433640E-DDAF-45CC-BC72-505FA72E2FDB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5CF71181-20CA-4A21-8A5C-21610DFF2D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5CF71181-20CA-4A21-8A5C-21610DFF2D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5CF71181-20CA-4A21-8A5C-21610DFF2D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5CF71181-20CA-4A21-8A5C-21610DFF2D3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
