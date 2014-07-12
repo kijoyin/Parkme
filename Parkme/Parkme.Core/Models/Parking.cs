@@ -17,8 +17,8 @@ namespace Parkme.Core.Models
         public string OperationalDay { get; set; }
         public string OperationsTime { get; set; }
 
-        public string RateWeekDay { get;set;}
-        public string RateWeekEnd { get; set; }
+        public decimal RateWeekDay { get;set;}
+        public decimal RateWeekEnd { get; set; }
         public string LocationDescription { get; set; }
         public string VehicleBay { get; set; }
         public string MotorCycleBay { get; set; }
