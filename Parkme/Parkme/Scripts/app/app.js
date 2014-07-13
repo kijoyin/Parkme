@@ -64,13 +64,6 @@ $(document).ready(function () {
         e.preventDefault();
         get_location();
     });0
-
-    $('#search').click(function (e) {
-        if (!$('#address').val()) {
-            alert("Please select a location");
-            e.preventDefault();
-        }
-    });
 });
 
 
