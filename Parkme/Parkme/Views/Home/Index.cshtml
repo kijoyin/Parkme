@@ -9,6 +9,7 @@
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
 <script src="~/Scripts/dist/typeahead.js"></script>
 <script src="~/Scripts/dist/typeahead-addresspicker.min.js"></script>
+
 <script>
     
 </script>
@@ -33,8 +34,18 @@
         <div class="col-lg-3"></div>
     </div>
 </div>
-@if(Model.IsDefault)
-{ 
+@if (Model.IsDefault)
+{
+<script src="~/Scripts/app/maps.js"></script>
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8 search-resutls">
+            <div id="map" style="width: 100%; height: 400px;"></div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+</div>
 <div class="container">
     <div class="row-fluid">
         <div class="col-lg-2"></div>
