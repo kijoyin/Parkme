@@ -41,14 +41,17 @@
                 @foreach(ParkingSearchItem item in Model.Parkings)
                 { 
                 <li>
-                    <h2>@item.Name</h2>
-                    <span class="distance">@item.distance</span>
-                    <span class="category">@item.Parking.Category</span>
-                    <span class="restrictions">@item.Parking.Restrictions</span>
-                    <span class="operationalday">@item.Parking.OperationalDay</span>
-                    <span class="operationaltime">@item.Parking.OperationsTime</span>
-                    <span class="fare">@item.Parking.RateWeekDay/hours <span>Free Now</span></span>
-                    <span class="vehiclebays">@item.Parking.VehicleBay</span>
+                    <h3>@item.Name</h3>
+                    <p>
+                        Distance from the location : <span class="distance">@item.distance</span>
+                        <br />Operational hours : <span class="operationalday">@item.Parking.OperationalDay</span>
+                        <span class="operationaltime">@item.Parking.OperationsTime</span>
+                        Hourly Rate : <span class="fare">$@item.Parking.RateWeekDay <span class="freenow">Free Now</span></span>
+                        <br />Number of Bays : <span class="vehiclebays">@item.Parking.VehicleBay</span>
+                        <br />Category : <span class="category">@item.Parking.Category</span>
+                        Restrictions : <span class="restrictions">@item.Parking.Restrictions</span>
+                        
+                    </p>
                     <hr />
                 </li>
                 }

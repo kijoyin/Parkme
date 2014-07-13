@@ -79,3 +79,38 @@ body {
     list-style:none;
     padding-left:0px;
 }
+.search-resutls h3{
+    font-size:18px;
+}
+.search-resutls p{
+    font-size:13px;
+}
+footer{
+    margin-bottom:0;
+}
+.distance{
+    font-weight:bolder;
+}
+.category{
+    font-weight:bolder;
+}
+.restrictions{
+    font-weight:bolder;
+}
+.operationalday{
+    font-weight:bolder;
+}
+.operationaltime{
+    font-weight:bolder;
+}
+.fare{
+    font-weight:bolder;
+}
+.freenow{
+    background-color:green;
+    color:blue;
+    font-size:15px;
+}
+.vehiclebays{
+    font-weight:bolder;
+}
