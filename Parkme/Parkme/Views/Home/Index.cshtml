@@ -23,11 +23,7 @@
             {
                 <a href="#" class="btn btn-primary btn-lg" role="button" id="currentLocation" title="Click to use your current location"><img src="~/assets/Maps-and-Geolocation-Define-location-icon.png" height="25px" /></a>
                 <input type="text" class="input-lg search-query" placeholder="I am driving to ..." id="address" name="location" value="@Model.SearchTerm">
-                <button type="submit" class="btn-lg">Search</button>
-                if(Model.IsDefault)
-                { 
-                    <button type="submit" class="btn-lg">Map view</button>
-                }
+                <button type="submit" class="btn-lg" id="search">Search</button>
             }
             
         </div>
@@ -50,24 +46,39 @@
     <div class="row-fluid">
         <div class="col-lg-2"></div>
         <div class="col-lg-8 search-resutls">
+            <div class="alert alert-danger" role="alert">This application is in beta and all the information provided here is just a suggestion. Please check the road signs before parking.</div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+</div>
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8 search-resutls">
+            @if (!string.IsNullOrWhiteSpace(Model.IntroPrediction))
+            { 
+                <div class="alert alert-info" role="alert">@Model.IntroPrediction</div>
+            }
             <ul>
-                @foreach(ParkingSearchItem item in Model.Parkings)
-                { 
-                <li>
-                    <h3>@item.Name</h3>
-                    <p>
-                        Distance from the location : <span class="distance">@item.distance</span>
-                        <br />Operational hours : <span class="operationalday">@item.Parking.OperationalDay</span>
-                        <span class="operationaltime">@item.Parking.OperationsTime</span>
-                        Hourly Rate : <span class="fare">$@item.Parking.RateWeekDay <span class="freenow">Free Now</span></span>
-                        <br />Number of Bays : <span class="vehiclebays">@item.Parking.VehicleBay</span>
-                        <br />Category : <span class="category">@item.Parking.Category</span>
-                        Restrictions : <span class="restrictions">@item.Parking.Restrictions</span>
-                        
-                    </p>
-                    <hr />
-                </li>
-                }
+                                                @foreach (ParkingSearchItem item in Model.Parkings)
+                {
+                                    <li class="@item.freeCss">
+
+    
+        <h3>@item.Name</h3>
+        <p>
+            Distance from the location : <span class="distance">@item.distance</span>
+            <br />Operational hours : <span class="operationalday">@item.Parking.OperationalDay</span>
+            <span class="operationaltime">@item.Parking.OperationsTime</span><br/>
+            Hourly Rate : <span class="fare">$@item.Parking.RateWeekDay @if(item.Isfree){<span class="label label-success">Free Now</span>}</span>
+            <br />Number of Bays : <span class="vehiclebays">@item.Parking.VehicleBay</span>
+            <br />Category : <span class="category">@item.Parking.Category</span>
+            Restrictions : <span class="restrictions">@item.Parking.Restrictions</span>
+
+        </p>
+        <hr />
+    </li>
+}
             </ul>
         </div>
         <div class="col-lg-2"></div>

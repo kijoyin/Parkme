@@ -16,5 +16,7 @@ namespace Parkme.Models
         public bool IsDefault { get; set; }
         public List<ParkingSearchItem> Parkings { get; set; }
         public string SearchTerm { get; set; }
+        public string IntroPrediction { get; set; }
+        public bool IsCurrentlyFree { get; set; }
     }
 }

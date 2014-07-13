@@ -48,18 +48,27 @@ namespace Parkme.Controllers
             ParkingManager manager = new ParkingManager();
             if (ModelState.IsValid)
             {
-                var filePath = HttpContext.Server.MapPath("~/data/dataset_parking_meter.csv");
-                PSearchViewModel model = new PSearchViewModel();
-                model.IsDefault = true;
-                model.Parkings = manager.GetNearybyParking(location, filePath).Take(20).ToList();
-                model.SearchTerm = location;
-                return View(model);
+                if (!string.IsNullOrEmpty(location))
+                {
+                    var filePath = HttpContext.Server.MapPath("~/data/dataset_parking_meter.csv");
+                    PSearchViewModel model = new PSearchViewModel();
+                    model.IsDefault = true;
+                    model.Parkings = manager.GetNearybyParking(location, filePath).Take(20).ToList();
+                    var closest = model.Parkings.FirstOrDefault();
+                    double x = Math.Truncate(closest.distanceindouble * 100) / 100;
+                    if (x > 1)
+                    {
+                        model.IntroPrediction = "Looks like the closest metered parking in your search location is more that a kilometer away. There could be free parking options nearby for which we don't have any record for.";
+                    }
+                    model.SearchTerm = location;
+                    return View(model);
+                }
                 // do your stuff like: save to database and redirect to required page.
             }
             
 
             // If we got this far, something failed, redisplay form
-            return View();
+            return Redirect("/");
         }
     }
 }

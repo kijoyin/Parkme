@@ -12,5 +12,8 @@ namespace Parkme.Core.Models
         public string Name { get; set; }
         public decimal Fare { get; set; }
         public Parking Parking { get; set; }
+        public double distanceindouble { get; set; }
+        public bool Isfree { get; set; }
+        public string freeCss { get; set; }
     }
 }

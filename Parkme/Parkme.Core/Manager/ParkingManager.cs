@@ -75,27 +75,81 @@ namespace Parkme.Core.Manager
             var list = GetParking(filePath);
             var result = new List<ParkingSearchItem>();
             var loc = ConvertAddress(location);
+            DateTime now=DateTime.Now;
+            DayOfWeek day = DateTime.Now.DayOfWeek;
             foreach (Parking item in list)
             {
-                var r = new ParkingSearchItem();
-                double distance = Distance(loc.Lat, loc.Long, item.Location.Lat, item.Location.Long,'K');
-                r.distance = ConvertDistance(distance);
-                r.Name = item.LocationDescription;
-                r.Parking = item;
-                result.Add(r);
+                try
+                {
+                    var r = new ParkingSearchItem();
+                    double distance = Distance(loc.Lat, loc.Long, item.Location.Lat, item.Location.Long, 'K');
+                    r.distance = ConvertDistance(distance);
+                    r.distanceindouble = distance;
+                    r.Name = item.LocationDescription;
+                    r.Parking = item;
+                    if (day.Equals(DayOfWeek.Saturday) || day.Equals(DayOfWeek.Sunday))
+                    {
+                        r.Fare = item.RateWeekEnd;
+                    }
+                    else
+                    {
+                        r.Fare = item.RateWeekDay;
+                    }
+                    if (r.Fare > 0)
+                    {
+                        r.Isfree = false;
+                        var times = item.OperationsTime.Split('-');
+                        var am = Regex.Match(times[0], @"\d+").Value;
+                        TimeSpan amTime = TimeSpan.FromHours(int.Parse(am));
+                        var pm = Regex.Match(times[1], @"\d+").Value;
+                        TimeSpan pmTime = TimeSpan.FromHours(int.Parse(pm) + 12);
+                        bool isinBetween = TimeBetween(DateTime.Now, amTime, pmTime);
+                        if (!isinBetween)
+                        {
+                            r.Isfree = true;
+                        }
+                    }
+                    else
+                    {
+                        r.Isfree = true;
+                    }
+                    if (r.Isfree)
+                    {
+                        r.freeCss = "alert alert-success";
+                    }
+                    else
+                    {
+                        r.freeCss = "alert alert-danger";
+                    }
+                    result.Add(r);
+                }
+                catch (Exception ex)
+                {
+                }
             }
-            var test = result.OrderBy(r => r.distance).ToList();
             return result.OrderBy(r=>r.distance).ToList();
         }
-        
+        bool TimeBetween(DateTime datetime, TimeSpan start, TimeSpan end)
+        {
+            // convert datetime to a TimeSpan
+            TimeSpan now = datetime.TimeOfDay;
+            // see if start comes before end
+            if (start < end)
+                return start <= now && now <= end;
+            // start is after end, so do the inverse comparison
+            return !(end < now && now < start);
+        }
         private string ConvertDistance(double distance)
         {
-            if (distance < 1)
+            double x = Math.Truncate(distance * 100) / 100;
+            if (x < 1)
             {
-                distance = distance * 100;
-                return distance.ToString() + " meters";
-            }
-            return distance.ToString() + " kilometers";
+                x = x * 100;
+                return x.ToString() + " meters";
+            }       // This is your number
+            double subnum = (x - (int)x)*100;
+            var intPart = (int)x;
+            return intPart.ToString() + (intPart>1?" kilometers":" kilometer")+" and "+subnum+" meters" ;
         }
 
         public Location ConvertAddress(string location)
