@@ -63,6 +63,12 @@ body {
     color:#333;
     width:100%;
     padding:10px;
+    
+}
+.tt-dataset-0 p:hover {
+    cursor:pointer;
+    background-color:blue;
+    color:white;
 }
 .search-resutls {
     background-color:#fff;
