@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/typeahead.bundle.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<script src="~/Scripts/dist/typeahead.js"></script>
+<script src="~/Scripts/dist/typeahead-addresspicker.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var addressPicker = new AddressPicker();
+        $('#address').typeahead(null, {
+            displayKey: 'description',
+            source: addressPicker.ttAdapter()
+        });
+    });
+</script>
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            @using( Html.BeginForm("Search", "Home", FormMethod.Post)) {
+                <input type="text" class="input-lg search-query" placeholder="I am driving to ..." id="address" name="location">
+                <button type="submit" class="btn-lg">Search</button>
+            }
+            
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6 search-resutls">
+           <ul>
+               <li>
+                   <h2>This is the title</h2>
+                   <p class="distance">600 meters</p>
+                   <p class="category">TICKETLESS METER MULTISPACE</p>
+                   <p class="restrictions">CLEARWAY 7-9 AM , 4-7 PM MON-FRI TOWAWAY</p>
+                   <p class="operationalday">MON-FRI</p>
+                   <p class="operationaltime">9AM-4PM</p>
+                   <p class="fare">12/hours <span>Free Now</span></p>
+                   <p class="vehiclebays">12</p>
+               </li>
+               <li>
+                   <h2>This is the title</h2>
+                   <p class="distance">600 meters</p>
+                   <p class="category">TICKETLESS METER MULTISPACE</p>
+                   <p class="restrictions">CLEARWAY 7-9 AM , 4-7 PM MON-FRI TOWAWAY</p>
+                   <p class="operationalday">MON-FRI</p>
+                   <p class="operationaltime">9AM-4PM</p>
+                   <p class="fare">12/hours <span>Free Now</span></p>
+                   <p class="vehiclebays">12</p>
+               </li>
+           </ul>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
+

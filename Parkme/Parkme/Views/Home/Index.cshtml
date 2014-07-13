@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Parkme.Core.Models;
+@model Parkme.Models.PSearchViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 <script src="~/Scripts/jquery-1.10.2.js"></script>
@@ -21,7 +23,7 @@
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
             @using( Html.BeginForm("Index", "Home", FormMethod.Post)) {
-                <input type="text" class="input-lg search-query" placeholder="I am driving to ..." id="address" name="location">
+                <input type="text" class="input-lg search-query" placeholder="I am driving to ..." id="address" name="location" value="@Model.SearchTerm">
                 <button type="submit" class="btn-lg">Search</button>
             }
             
@@ -29,4 +31,31 @@
         <div class="col-lg-3"></div>
     </div>
 </div>
+@if(Model.IsDefault)
+{ 
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8 search-resutls">
+            <ul>
+                @foreach(ParkingSearchItem item in Model.Parkings)
+                { 
+                <li>
+                    <h2>@item.Name</h2>
+                    <span class="distance">@item.distance</span>
+                    <span class="category">@item.Parking.Category</span>
+                    <span class="restrictions">@item.Parking.Restrictions</span>
+                    <span class="operationalday">@item.Parking.OperationalDay</span>
+                    <span class="operationaltime">@item.Parking.OperationsTime</span>
+                    <span class="fare">@item.Parking.RateWeekDay/hours <span>Free Now</span></span>
+                    <span class="vehiclebays">@item.Parking.VehicleBay</span>
+                    <hr />
+                </li>
+                }
+            </ul>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+</div>
+}
 

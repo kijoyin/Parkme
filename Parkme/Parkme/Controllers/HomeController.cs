@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Parkme.Core.Manager;
+using Parkme.Core.Models;
+using Parkme.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,7 +24,7 @@ namespace Parkme.Controllers
                 var results = JsonConvert.DeserializeObject<dynamic>(reader.ReadToEnd());
                 var Lat = results.results[0].geometry.location.lat;
                 var Long = results.results[0].geometry.location.lng;
-                return View();
+                return View(new PSearchViewModel());
             }
         }
 
@@ -47,9 +49,14 @@ namespace Parkme.Controllers
             if (ModelState.IsValid)
             {
                 var filePath = HttpContext.Server.MapPath("~/data/dataset_parking_meter.csv");
-                manager.GetNearybyParking(location, filePath);
+                PSearchViewModel model = new PSearchViewModel();
+                model.IsDefault = true;
+                model.Parkings = manager.GetNearybyParking(location, filePath).Take(20).ToList();
+                model.SearchTerm = location;
+                return View(model);
                 // do your stuff like: save to database and redirect to required page.
             }
+            
 
             // If we got this far, something failed, redisplay form
             return View();

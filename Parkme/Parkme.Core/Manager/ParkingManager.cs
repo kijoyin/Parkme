@@ -78,12 +78,23 @@ namespace Parkme.Core.Manager
             {
                 var r = new ParkingSearchItem();
                 double distance = Distance(loc.Lat, loc.Long, item.Location.Lat, item.Location.Long,'K');
-                r.distance = distance;
+                r.distance = ConvertDistance(distance);
                 r.Name = item.LocationDescription;
+                r.Parking = item;
                 result.Add(r);
             }
             var test = result.OrderBy(r => r.distance).ToList();
             return result.OrderBy(r=>r.distance).ToList();
+        }
+        
+        private string ConvertDistance(double distance)
+        {
+            if (distance < 1)
+            {
+                distance = distance * 100;
+                return distance.ToString() + " meters";
+            }
+            return distance.ToString() + " kilometers";
         }
 
         public Location ConvertAddress(string location)
@@ -106,6 +117,7 @@ namespace Parkme.Core.Manager
         {
             throw new NotImplementedException();
         }
+        //http://www.geodatasource.com/developers/c-sharp
 
         private double Distance(double lat1, double lon1, double lat2, double lon2, char unit)
         {
