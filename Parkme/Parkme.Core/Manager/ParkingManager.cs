@@ -148,11 +148,14 @@ namespace Parkme.Core.Manager
             if (x < 1)
             {
                 x = x * 100;
-                return x.ToString() + " meters";
+                if (x > 0)
+                {
+                    return x.ToString() + " meters";
+                }
             }       // This is your number
             double subnum = (x - (int)x)*100;
             var intPart = (int)x;
-            return intPart.ToString() + (intPart>1?" kilometers":" kilometer")+" and "+subnum+" meters" ;
+            return intPart.ToString() + (intPart>1?" kilometers":" kilometer")+((subnum>0)?(" and "+subnum+" meters"):"") ;
         }
 
         public Location ConvertAddress(string location)
