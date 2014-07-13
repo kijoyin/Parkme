@@ -75,8 +75,11 @@ namespace Parkme.Core.Manager
             var list = GetParking(filePath);
             var result = new List<ParkingSearchItem>();
             var loc = ConvertAddress(location);
-            DateTime now=DateTime.Now;
-            DayOfWeek day = DateTime.Now.DayOfWeek;
+            DateTime now = DateTime.UtcNow;
+            TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("AUS Eastern Standard Time");
+            DateTime cstTime = TimeZoneInfo.ConvertTimeFromUtc(now, cstZone);
+
+            DayOfWeek day = cstTime.DayOfWeek;
             foreach (Parking item in list)
             {
                 try
@@ -103,7 +106,7 @@ namespace Parkme.Core.Manager
                         TimeSpan amTime = TimeSpan.FromHours(int.Parse(am));
                         var pm = Regex.Match(times[1], @"\d+").Value;
                         TimeSpan pmTime = TimeSpan.FromHours(int.Parse(pm) + 12);
-                        bool isinBetween = TimeBetween(DateTime.Now, amTime, pmTime);
+                        bool isinBetween = TimeBetween(cstTime, amTime, pmTime);
                         if (!isinBetween)
                         {
                             r.Isfree = true;

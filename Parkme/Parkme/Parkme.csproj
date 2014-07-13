@@ -193,7 +193,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Data\dataset_parking_meter.csv" />
-    <None Include="Properties\PublishProfiles\Parkme1673.pubxml" />
+    <None Include="Properties\PublishProfiles\Parkme1673 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\Parkme1673 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dist\typeahead-addresspicker.js" />
     <Content Include="Scripts\dist\typeahead-addresspicker.min.js" />
