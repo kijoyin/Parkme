@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Parkme.Core.Manager
@@ -26,8 +27,8 @@ namespace Parkme.Core.Manager
                     continue;
 
                 }
-
-                var values = line.Split(',');
+                Regex CSVParser = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+                var values = CSVParser.Split(line);
                 Parking parkingTmpo = new Parking();
                 decimal rateWeekday = new decimal();
                 decimal rateWeekend = new decimal();

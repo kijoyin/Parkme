@@ -40,3 +40,58 @@
 //    }
 //    });
 //});
+
+function get_location() {
+    if (Modernizr.geolocation) {
+        navigator.geolocation.getCurrentPosition(showdefault);
+    } else {
+        // no native support; maybe try a fallback?
+    }
+}
+function showdefault(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    getFormattedLatlong(latitude, longitude);
+}
+
+$(document).ready(function () {
+    var addressPicker = new AddressPicker();
+    $('#address').typeahead(null, {
+        displayKey: 'description',
+        source: addressPicker.ttAdapter()
+    });
+    $('#currentLocation').click(function (e) {
+        e.preventDefault();
+        get_location();
+    });
+});
+
+var geocoder;
+var map;
+var infowindow = new google.maps.InfoWindow();
+var marker;
+function initialize() {
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(40.730885, -73.997383);
+    var mapOptions = {
+        zoom: 8,
+        center: latlng
+    }
+    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+}
+
+function getFormattedLatlong(_lat, _long) {
+    var geocoder = new google.maps.Geocoder();
+    var lat = parseFloat(_lat);
+    var lng = parseFloat(_long);
+    var latlng = new google.maps.LatLng(lat, lng);
+    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            if (results[1]) {
+                $('#address').val(results[1].formatted_address);
+            }
+        } else {
+            alert("Geocoder failed due to: " + status);
+        }
+    });
+}
