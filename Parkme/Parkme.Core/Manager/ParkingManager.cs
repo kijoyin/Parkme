@@ -163,13 +163,20 @@ namespace Parkme.Core.Manager
             HttpWebRequest request = WebRequest.Create("https://maps.googleapis.com/maps/api/geocode/json?address=" + location) as HttpWebRequest;
             using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
             {
-                Location loc = new Location();
-                // Get the response stream  
-                StreamReader reader = new StreamReader(response.GetResponseStream());
-                var results = JsonConvert.DeserializeObject<dynamic>(reader.ReadToEnd());
-                loc.Lat = results.results[0].geometry.location.lat;
-                loc.Long = results.results[0].geometry.location.lng;
-                return loc;
+                try
+                {
+                    Location loc = new Location();
+                    // Get the response stream  
+                    StreamReader reader = new StreamReader(response.GetResponseStream());
+                    var results = JsonConvert.DeserializeObject<dynamic>(reader.ReadToEnd());
+                    loc.Lat = results.results[0].geometry.location.lat;
+                    loc.Long = results.results[0].geometry.location.lng;
+                    return loc;
+                }
+                catch
+                {
+                    return new Location();
+                }
             }
                    
         }
